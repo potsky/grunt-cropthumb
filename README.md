@@ -2,7 +2,7 @@
 
 > Crops and scales down image to create thumbnails.
 
-This plugin was built quickly for personal use and has had very little testing. 
+This plugin was built quickly for personal use and has had very little testing. Because of this, this plugin is not published to the npm registry.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -10,8 +10,9 @@ This plugin requires Grunt `~0.4.1`
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install grunt-cropthumb --save-dev
+npm install git+http://github.com/jbakse/grunt-cropthumb.git --save-dev
 ```
+
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
