@@ -74,6 +74,18 @@ Default value: `false`
 
 Set to true to overwrite existing files with the same name as the new cropthumb.
 
+#### options.changeName
+Type: `boolean`
+Default value: `true`
+
+changes `image.jpg` to `image.200.jpg` (referencing width of thumb)
+
+#### options.upscale
+Type: `boolean`
+Default value: `false`
+
+should images be upscaled if smaller than width/height?
+
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).

@@ -27,7 +27,9 @@ module.exports = function(grunt) {
       width: 200,
       height: 200,
       cropAmount: 0.5,
-      overwrite: false
+      overwrite: false,
+      changeName: true,
+      upscale: false
     });
 
     // Iterate over all specified file groups.
@@ -37,8 +39,11 @@ module.exports = function(grunt) {
         dest_ext = path.extname(f.dest),
         dest_name = path.basename(f.dest, dest_ext),
         source_file = f.src[0],
-        dest_file = dest_dir + "/" + dest_name + "." + options.width + dest_ext;
+        dest_file = dest_dir + "/" + dest_name + dest_ext;
 
+      if (options.changeName){
+        dest_file = dest_dir + "/" + dest_name + "." + options.width + dest_ext;
+      }
 
       if (!grunt.file.isDir(dest_dir)) {
         grunt.file.mkdir(dest_dir);
@@ -60,20 +65,53 @@ module.exports = function(grunt) {
       image
         .size(function(err, size) {
         if (err) {
-          grunt.log.error("error reading image size");
+          grunt.log.error("error reading image size: "+source_file);
+          grunt.log.error(err);
           callback(err);
         }
 
+        var source_aspect = size.width/size.height;
+        if (options.width == null) {
+          options.width = options.height * source_aspect;
+        }
+        if (options.height == null) {
+          options.height = options.width / source_aspect;
+        }
+
+        var target_aspect = options.width / options.height;
+
+        if (!options.upscale){
+          if (size.width < options.width) {
+            options.width = size.width;
+            options.height = options.width / target_aspect;
+          }
+          if (size.height < options.height) {
+            options.height = size.height;
+            options.width = options.height * target_aspect;
+          }
+        }
+        
         var w = size.width;
         var h = size.height;
-        var left = (w * 0.5 - options.width * 0.5) * options.cropAmount;
+        var left = (w * 0.5 - options.width * 0.5);
+        var top = (h * 0.5 - options.height * 0.5);
+
+        var grow = left - (left * options.cropAmount);
+        left -= grow;
+        top -= grow/target_aspect;
+
         var right = w - left;
-        var top = (h * 0.5 - options.height * 0.5) * options.cropAmount;
         var bottom = h - top;
+        var width = right - left;
+        var height = bottom - top;
+
+
         
         image
-          .crop(right - left, bottom - top, left, top)
-          .thumb(options.width, options.height, dest_file, 95, function(err) {
+          .crop(width, height, left, top)
+          .resize(options.width, options.height)
+          .quality(95)
+          .write(dest_file, function(err) {
           if (err) {
             grunt.log.error("error creating cropthumb");
             callback(err);

@@ -43,7 +43,50 @@ module.exports = function(grunt) {
             ]
           }
         ]
+      },
+      aspect: {
+        options: {
+          width: 50,
+          height: null,
+          cropAmount: 0,
+          changeName: false
+        },
+        files: [{
+            expand: true,
+            dot: true,
+            cwd: 'test/fixtures/',
+            dest: 'tmp/',
+            src: [
+                'test.png'
+            ]
+          }
+        ]
+      },
+      small: {
+        options: {
+          width: 200,
+          height: null,
+          cropAmount: 0,
+          changeName: false
+        },
+        files: {
+          "tmp/small.png": "test/fixtures/small.png"
+        }
+      },
+       upscale: {
+        options: {
+          width: 200,
+          height: null,
+          cropAmount: 0,
+          changeName: false,
+          upscale: true
+        },
+        files: {
+          "tmp/upscaled.png": "test/fixtures/small.png"
+        }
+        
       }
+
     },
 
     // Unit tests.
