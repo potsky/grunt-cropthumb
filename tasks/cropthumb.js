@@ -15,6 +15,7 @@ var fs = require('fs');
 var gm = require('gm');
 var path = require('path');
 
+
 module.exports = function(grunt) {
 
   grunt.registerMultiTask('cropthumb', 'Crops and scales image to create thumbnail.', function() {
