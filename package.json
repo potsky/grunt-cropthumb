@@ -1,7 +1,7 @@
 {
   "name": "grunt-cropthumb",
   "description": "Crops and scales down image to create thumbnails.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/jbakse/grunt-cropthumb",
   "author": {
     "name": "Justin Bakse",
