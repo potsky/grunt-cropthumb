@@ -1,3 +1,9 @@
-node_modules
-npm-debug.log
+# OS Junk Files
+.DS_Store
+Thumbs.db
+*.log
 tmp
+
+# Package Managers & Modules
+node_modules
+Gemfile.lock
