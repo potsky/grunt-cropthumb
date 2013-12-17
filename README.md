@@ -1,3 +1,27 @@
+
+---
+
+# This is a fork
+
+Original : https://github.com/jbakse/grunt-cropthumb
+
+---
+
+How to install :
+
+```bash
+$port install GraphicsMagick
+$npm install
+$grunt
+```
+
+---
+
+# Original below
+
+---
+
+
 # grunt-cropthumb
 
 > Crops and scales down image to create thumbnails.

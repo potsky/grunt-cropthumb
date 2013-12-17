@@ -55,12 +55,13 @@ module.exports = function(grunt) {
       }
 
       if (options.overwrite === false && grunt.file.isFile(dest_file)) {
-        return grunt.log.writeln("Skipping " + source_file + " because destination already exists.\n" +
-          "Set options 'overwrite' to true to enable overwriting of files.");
+//        return grunt.log.writeln("Skipping " + source_file + " because destination already exists.\n" + "Set options 'overwrite' to true to enable overwriting of files.");
+        callback();
+        return;
       }
 
 
-      //grunt.log.writeln("making cropthumb: " + dest_file);
+      grunt.log.writeln("cropthumb: " + dest_file);
       var image = gm(source_file);
       image
         .size(function(err, size) {
@@ -90,7 +91,7 @@ module.exports = function(grunt) {
             options.width = options.height * target_aspect;
           }
         }
-        
+
         var w = size.width;
         var h = size.height;
         var left = (w * 0.5 - options.width * 0.5);
@@ -106,7 +107,7 @@ module.exports = function(grunt) {
         var height = bottom - top;
 
 
-        
+
         image
           .crop(width, height, left, top)
           .resize(options.width, options.height)
